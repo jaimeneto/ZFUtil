@@ -1,0 +1,143 @@
+body { 
+    font-family: arial;
+    font-size: 12px 
+}
+
+.calendar { 
+    width: 300px;
+    cursor: default; 
+    -webkit-box-shadow: 5px 5px 13px -2px #616161;
+    -moz-box-shadow: 5px 5px 13px -2px #616161;
+    box-shadow: 5px 5px 13px -2px #616161;
+}
+.calendar a { 
+    text-decoration:none; 
+    color:#000; 
+}
+.calendar .calendar-header { 
+    background-color: #0172B6;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 20px; 
+    border-radius: 4px 4px 0 0;
+}
+.calendar .calendar-header * {
+    color: #fff;
+}
+.calendar .calendar-header .current-month { 
+    font-weight: bold; 
+}
+.calendar .calendar-header .prev-month-link { 
+    float: left;
+}
+.calendar .calendar-header .next-month-link { 
+    float: right;
+}
+.calendar .calendar-header .prev-month-link a,
+.calendar .calendar-header .next-month-link a {
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-indent: -1000px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.calendar .calendar-header .prev-month-link a {
+    background-image: url(../img/arrow-left.png);
+}
+.calendar .calendar-header .next-month-link a {
+    background-image: url(../img/arrow-right.png);
+}
+.calendar table { 
+    border-collapse: collapse;
+    width: 100%; 
+}
+.calendar table td, 
+.calendar table th { 
+    border: 1px solid #dfdfdf;
+    border-width: 1px 1px 0 0;
+    text-align: center;
+    position: relative;
+    line-height: 20px; 
+}
+.calendar table td { 
+    background-color: #F2F2F2;
+}
+.calendar table td a.day { 
+    display: block; 
+    border: 1px solid transparent; 
+}
+.calendar table td a.day:hover { 
+    background-color: #fdf000;
+    color: #0072b6;
+}
+.calendar table th {
+    background-color: #dfdfdf;
+    color: #72787D;
+    text-transform: uppercase;
+}
+.calendar table td.other-month a { 
+    color: #cccccc
+}
+.calendar table td.today a { 
+    background-color: #0072b6; 
+    color: #ffffff;
+}
+.calendar table td.selected-date a { 
+    background-color: yellow; 
+    color: #0072b6;
+    font-weight: bold;
+}
+.calendar table td a {
+    position: relative;
+}
+.calendar table td a .inserts {
+    display: none;
+}
+
+.calendar table td a:hover .inserts {
+    display: block;
+    position: absolute;
+    padding: 5px 10px;
+    background: #ADB400;
+    background: -webkit-linear-gradient(90deg, #DBDBDB 5%, #FFFFFF 100%);
+    background: -moz-linear-gradient(90deg, #DBDBDB 5%, #FFFFFF 100%);
+    background: -ms-linear-gradient(90deg, #DBDBDB 5%, #FFFFFF 100%);
+    background: linear-gradient(180deg, #FFFFFF 5%, #DBDBDB 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#DBDBDB');
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: 5px 5px 13px -2px #616161;
+    -moz-box-shadow: 5px 5px 13px -2px #616161;
+    box-shadow: 5px 5px 13px -2px #616161;
+    z-index: 1;
+    left: 40px;
+    top: -2px;
+    font-size: smaller;
+    color: #000;
+    white-space: nowrap;
+}
+
+.calendar table td a .inserts:after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: -9px;
+    border-style: solid;
+    border-width: 7px 9px 7px 0;
+    border-color: transparent #F5F5ED;
+    display: block;
+    width: 0;
+    z-index: 1;
+}
+
+.calendar table td.feriado a { 
+    color: blue;
+    border-color: blue; 
+}
+.calendar table td.other-month.feriado a {
+    color: #ccc;
+    border-color: #ccc;
+}

@@ -1,0 +1,31 @@
+<h1>Eventos e feriados</h1>
+
+<?php echo $this->calendar($this->data, array(
+    'showPrevMonthLink'  => true,                                   // Faz com que o link para o mês passado seja exibido
+    'showNextMonthLink'  => true,                                   // Faz com que o link para o mês seguinte seja exibido
+    'showOtherMonthDays' => true,                                   // Faz com que os dias de outros meses sejam exibidos
+    'dateBaseUrl'        => $this->baseUrl('index/calendar/data'),  // Define a url base para os links das datas
+    'monthBaseUrl'       => $this->baseUrl('index/calendar/data'),  // Define a url base para os links de navegação dos meses
+    'cssClasses' => array(                                          // Define uma classe css "feriado" para as datas no array
+        'feriado' => array_keys($this->feriados)
+    ),
+    // Dá um destaque maior inserindo o nome do feriado do carnaval
+    'inserts' => $this->feriados,
+    // Define que o html deve ser inserido dentro do link, após a data
+    'insertsPosition'    => ZFUtil_View_Helper_Calendar::INSERT_APPEND
+)) ?>
+
+<br>
+
+<?php if (Zend_Date::isDate($this->data, 'yyyy-MM-dd')): ?>
+    <h2><?php $date = new Zend_Date($this->data); 
+    echo ucfirst($date->get("EEEE, dd 'de' MMMM 'de' yyyy")); ?></h2>
+
+    <?php if ($this->eventos): ?>
+    <ul>
+        <?php foreach($this->eventos as $evento): ?>
+        <li><?php echo $this->escape($evento); ?></li>
+        <?php endforeach; ?>
+    </ul>
+    <?php endif; ?>
+<?php endif;?>
