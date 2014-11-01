@@ -1,0 +1,70 @@
+<h1>ZFUtil_View_Helper_Calendar</h1>
+
+<p class="well">
+    Esta classe gera um calendário dinâmico com diversas opções de personalização. <br>
+    Datas podem ser destacas e textos podem ser inseridos em datas específicas. <br>
+    Várias classes css são inseridas para tornar fácil personalizar o visual do calendário.
+</p>
+
+<?php echo $this->calendar($this->data, array(
+    'showPrevMonthLink'  => true,                                   // Faz com que o link para o mês passado seja exibido
+    'showNextMonthLink'  => true,                                   // Faz com que o link para o mês seguinte seja exibido
+    'showOtherMonthDays' => true,                                   // Faz com que os dias de outros meses sejam exibidos
+    'dateBaseUrl'        => $this->baseUrl('view-helper/calendar/data'),  // Define a url base para os links das datas
+    'monthBaseUrl'       => $this->baseUrl('view-helper/calendar/data'),  // Define a url base para os links de navegação dos meses
+    'cssClasses' => array(                                          // Define uma classe css "feriado" para as datas no array
+        'feriado' => array_keys($this->feriados)
+    ),
+    // Dá um destaque maior inserindo o nome do feriado do carnaval
+    'inserts' => $this->feriados,
+    // Define que o html deve ser inserido dentro do link, após a data
+    'insertsPosition'    => ZFUtil_View_Helper_Calendar::INSERT_APPEND
+)) ?>
+
+<br>
+
+<?php if (Zend_Date::isDate($this->data, 'yyyy-MM-dd')): ?>
+    <h2><?php $date = new Zend_Date($this->data); 
+    echo ucfirst($date->get("EEEE, dd 'de' MMMM 'de' yyyy")); ?></h2>
+
+    <?php if ($this->eventos): ?>
+    <ul>
+        <?php foreach($this->eventos as $evento): ?>
+        <li><?php echo $this->escape($evento); ?></li>
+        <?php endforeach; ?>
+    </ul>
+    <?php endif; ?>
+<?php endif;?>
+
+<hr>
+<pre>
+<?php echo "&lt;?php 
+    \$ano = Zend_Date::now()->get('yyyy');                                      // Ano atual
+    \$feriados = array(                                                         // Definindo feriados
+        \"{\$ano}-01-01\" => 'Ano Novo',
+        \"{\$ano}-04-21\" => 'Tiradentes',
+        \"{\$ano}-05-01\" => 'Dia do Trabalhador',
+        \"{\$ano}-09-07\" => 'Dia da Independência',
+        \"{\$ano}-10-12\" => 'Nossa Senhora de Aparecida',
+        \"{\$ano}-11-02\" => 'Dia de Finados',
+        \"{\$ano}-11-15\" => 'Proclamação da República',
+        \"{\$ano}-12-25\" => 'Natal',
+        \"{\$ano}-10-30\" => array(                                             // Eventos no mesmo dia
+            'Evento 1',
+            'Evento 2'
+        )
+    );
+    echo \$this->calendar(\$this->data, array(
+        'showPrevMonthLink'  => true,                                           // Faz com que o link para o mês passado seja exibido
+        'showNextMonthLink'  => true,                                           // Faz com que o link para o mês seguinte seja exibido
+        'showOtherMonthDays' => true,                                           // Faz com que os dias de outros meses sejam exibidos
+        'dateBaseUrl'        => \$this->baseUrl('view-helper/calendar/data'),    // Define a url base para os links das datas
+        'monthBaseUrl'       => \$this->baseUrl('view-helper/calendar/data'),    // Define a url base para os links de navegação dos meses
+        'cssClasses' => array(                                                  // Define uma classe css \"feriado\" para as datas no array
+            'feriado' => array_keys(\$feriados)
+        ),
+        'inserts' => \$feriados,                                           // Dá um destaque maior inserindo o nome do feriado do carnaval
+        'insertsPosition'    => ZFUtil_View_Helper_Calendar::INSERT_APPEND      // Define que o html deve ser inserido dentro do link, após a data
+    )); 
+?&gt;"; ?>
+</pre>

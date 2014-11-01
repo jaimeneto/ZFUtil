@@ -1,0 +1,23 @@
+<h1>ZFUtil_Filter_Slug</h1>
+
+<p class="well">
+    Esta filtro remove todos os acentos e converte caracteres diferentes para 
+    seus correspondentes no alfabeto comum, e transforma todos os espaçamentos
+    em hífens, gerando um slug que pode ser usado para urls ou nomes de arquivos.
+</p>
+
+<form method="post" role="form" class="form-inline">
+    <div class="form-group">
+        <label for="texto">Texto: </label>
+        <input type="text" class="form-control" id="texto" name="texto" 
+               value="<?php echo $this->texto; ?>" size="50" />
+    </div>
+    <button type="submit" class="btn btn-default">Filtrar</button>
+</form>
+
+<hr>
+
+<h5>
+<strong>Saída:</strong>
+<span class="text-primary"><?php echo $this->filteredText; ?></span>
+</h5>
